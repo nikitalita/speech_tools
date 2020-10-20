@@ -33,7 +33,7 @@
 ###########################################################################
 
 CH_TRACK=${CH_TRACK:-$TOP/bin/ch_track}
-DATA=${DATA:-../lib/example_data}
+DATA=${DATA:-$TOP/lib/example_data}
 
 set -x
 
