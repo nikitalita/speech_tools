@@ -40,7 +40,7 @@ LISP siod_send_lisp_to_client(LISP x)
 	fwrite((const char *)m,sizeof(char),m.length(),fd);
 	fwrite("\n",1,1,fd);
 	fclose(fd);
-#ifdef WIN32
+#ifdef _WIN32
 	send(siod_server_socket,"LP\n",3,0);
 #else
 	r = write(siod_server_socket,"LP\n",3);
@@ -61,7 +61,7 @@ int sock_acknowledge_error()
     int r = 0;
     
     if (siod_server_socket != -1)
-#ifdef WIN32
+#ifdef _WIN32
 	send(siod_server_socket,"ER\n",3,0);
 #else
         r = write(siod_server_socket,"ER\n",3);
@@ -75,7 +75,7 @@ static int acknowledge_sock_print(LISP x)
     int r;
 
     siod_send_lisp_to_client(x);
-#ifdef WIN32
+#ifdef _WIN32
     send(siod_server_socket,"OK\n",3,0);
 #else
     r = write(siod_server_socket,"OK\n",3);
@@ -97,7 +97,7 @@ long repl_from_socket(int fd)
     /* Read from given fd as stdin */
     struct repl_hooks hd;
 
-#ifdef WIN32
+#ifdef _WIN32
     if (!SetStdHandle(STD_INPUT_HANDLE,(HANDLE)fd))
     {
 	GetLastError();
@@ -110,7 +110,7 @@ long repl_from_socket(int fd)
     hd.repl_puts = ignore_puts;
     hd.repl_print = acknowledge_sock_print;
     hd.repl_eval = NULL;
-#ifdef WIN32
+#ifdef _WIN32
     hd.repl_read = lreadwinsock;
 #else
     hd.repl_read = NULL;

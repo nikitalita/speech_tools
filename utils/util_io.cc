@@ -51,6 +51,10 @@
 #include "EST_cutils.h"
 #include "EST_Token.h"
 
+#ifdef _WIN32
+#include <io.h>
+#endif
+
 EST_String make_tmp_filename()
 {
     // returns tmp filename

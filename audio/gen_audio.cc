@@ -51,6 +51,10 @@
 #include "EST_audio.h"
 #include "EST_wave_aux.h"
 
+#ifdef _WIN32
+#include <process.h>
+#endif
+
 static int play_sunau_wave(EST_Wave &inwave, EST_Option &al);
 static int play_socket_wave(EST_Wave &inwave, EST_Option &al);
 static int play_aucomm_wave(EST_Wave &inwave, EST_Option &al);

@@ -51,7 +51,7 @@
 #include "EST_bool.h"
 #include "siod.h"
 #include "siodp.h"
-#include "io.h"
+#include "slib_io.h"
 
 EST_Regex RxURL("\\([a-z]+\\)://?\\([^/:]+\\)\\(:\\([0-9]+\\)\\)?\\(.*\\)");
 EST_Regex RxFILEURL("file:.*");

@@ -46,11 +46,11 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
+
 #include "EST_Token.h"
 #include "EST_FMatrix.h"
 #include "EST_multistats.h"
 #include "EST_Wagon.h"
-#include "EST_math.h"
 
 Discretes wgn_discretes;
 
@@ -813,7 +813,7 @@ static float wgn_random_number(float x)
      * implies a loss of precision. C++-11 has std::uniform_real_distribution
      * that provides a cleaner solution. Consider adopting c++-11
      */
-    return (((float)random())/(float)RAND_MAX)*x;
+    return (((float)rand())/(float)RAND_MAX)*x;
 }
 
 #ifdef OMP_WAGON

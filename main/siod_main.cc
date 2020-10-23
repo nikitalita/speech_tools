@@ -43,6 +43,10 @@
 #include "EST_Pathname.h"
 #include "siod.h"
 
+#ifdef _WIN32
+#include <io.h>
+#endif
+
 static void siod_lisp_vars(void);
 static void siod_load_default_files(void);
 

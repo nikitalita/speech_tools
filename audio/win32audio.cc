@@ -46,7 +46,7 @@
 
 #ifdef SUPPORT_WIN32AUDIO
 
-#include <EST_system.h>
+#include "EST_system.h"
 
 #ifdef SYSTEM_IS_UNIX
 
@@ -98,10 +98,10 @@ int play_win32audio_wave(EST_Wave &inwave, EST_Option &al)
     struct riff_header *hdr = (struct riff_header *)buffer;
     char *data = buffer + sizeof(struct riff_header);
 
-    strncpy(hdr->riff, "RIFF", 4);
+    memcpy(hdr->riff, "RIFF", 4);
     hdr->file_size = sizeof(riff_header) + inwave.length()*sizeof(short);
-    strncpy(hdr->wave, "WAVE", 4);
-    strncpy(hdr->fmt, "fmt ", 4);
+    memcpy(hdr->wave, "WAVE", 4);
+    memcpy(hdr->fmt, "fmt ", 4);
     hdr->header_size = 16;
     hdr->sample_format = WAVE_FORMAT_PCM;
     hdr->n_channels = inwave.num_channels();
@@ -109,7 +109,7 @@ int play_win32audio_wave(EST_Wave &inwave, EST_Option &al)
     hdr->bytes_per_second = hdr->sample_rate * hdr->n_channels * 2;
     hdr->block_align =  hdr->n_channels * 2;
     hdr->bits_per_sample = 16;
-    strncpy(hdr->data, "data", 4);
+    memcpy(hdr->data, "data", 4);
     hdr->data_size = hdr->n_channels * 2 * inwave.num_samples();
   
     memcpy(data, inwave.values().memory(), hdr->n_channels * 2 * inwave.num_samples());

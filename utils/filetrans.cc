@@ -57,7 +57,7 @@ static int getc_unbuffered(SOCKET_FD fd)
     char c;
     int n;
 
-#ifdef WIN32
+#ifdef _WIN32
     n = recv(fd,&c,1,0);
 #else
     n = read(fd,&c,1);
@@ -112,7 +112,7 @@ int socket_send_file(SOCKET_FD fd,const EST_String &filename)
     // Send file down fd using the 7E end stuffing technique.
     // This guarantees the binary transfer without any other
     // signals eof etc
-#ifndef WIN32
+#ifndef _WIN32
     FILE *ffd = fdopen(dup(fd),"wb");   // use some buffering
 #endif
     FILE *infd;
@@ -134,7 +134,7 @@ int socket_send_file(SOCKET_FD fd,const EST_String &filename)
 	    k=0;
 	if (file_stuff_key[k] == '\0')
 	{
-#ifdef WIN32
+#ifdef _WIN32
 	    const char filler='X';
 	    send(fd,&filler,1,0);
 #else
@@ -142,14 +142,14 @@ int socket_send_file(SOCKET_FD fd,const EST_String &filename)
 #endif
 	    k=0;
 	}
-#ifdef WIN32
+#ifdef _WIN32
 	send(fd,(const char *)&c,1,0);
 #else
 	putc(c,ffd);
 #endif
     }
     for (k=0; file_stuff_key[k] != '\0'; k++)
-#ifdef WIN32
+#ifdef _WIN32
 	send(fd,file_stuff_key+k,1,0);
 #else
 	putc(file_stuff_key[k],ffd);      // stuff whole key as its the end
