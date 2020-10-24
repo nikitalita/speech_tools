@@ -38,19 +38,20 @@
  /*                                                                       */
  /*************************************************************************/
 
-#ifndef __EST_ERROR_H__
-#define __EST_ERROR_H__
+#ifndef EST_ERROR_H__
+#define EST_ERROR_H__
 
 /* may get included from C */
 #ifdef __cplusplus
 #include <cstdarg>
 #include <cstdio>
+#include <csetjmp>
 #else
 #include <stdarg.h>
 #include <stdio.h>
+#include <setjmp.h>
 #endif
 
-#include <setjmp.h>
 #include "EST_unix.h"
 
 

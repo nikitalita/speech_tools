@@ -1,8 +1,6 @@
 project('speech-tools', ['cpp', 'c'], version : '2.5.1',
         default_options : ['c_std=c99', 'cpp_std=c++11'], meson_version: '>=0.55.0')
 
-add_global_arguments('-fno-implicit-templates', language : 'cpp')
-
 PROJECT_NAME = 'Edinburgh Speech Tools Library'
 PROJECT_DATE = 'July 2020'
 PROJECT_VERSION = meson.project_version()
@@ -14,6 +12,11 @@ DOCDIR = join_paths(get_option('prefix'), get_option('datadir'), 'doc', meson.pr
 
 cc = meson.get_compiler('c')
 cxx = meson.get_compiler('cpp')
+
+if cxx.has_argument('-fno-implicit-templates')
+  add_project_arguments('-fno-implicit-templates', language : 'cpp')
+endif
+
 
 v_array = meson.project_version().split('.')
 v_major = v_array[0]
