@@ -82,7 +82,7 @@ jobs:
     - name: Build
       run: |
         call "%VCVARS%"
-        meson compile -C build -v
+        meson compile -C build -j1
     - name: Test
       run: |
         call "%VCVARS%"
